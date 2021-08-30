@@ -5,35 +5,34 @@ import * as route53 from "@aws-cdk/aws-route53";
 import * as route53Targets from "@aws-cdk/aws-route53-targets";
 import * as cdk from "@aws-cdk/core";
 
-/**
- * hostedZone: Existing Route53 Hosted Zone that controls source domain.
- * redirectConfig: RedirectOptions for target.
- * vpc: VPC that this Redirector instance will use
- *    (required to avoid VPC explosion)
- */
 export interface RedirectProps {
-  hostedZone: route53.IHostedZone;
-  redirectConfig: elbv2.RedirectOptions;
-  vpc: ec2.Vpc;
+  /**
+   * Existing Route53 Hosted Zone that controls the source domain.
+   */
+  readonly hostedZone: route53.IHostedZone;
+
+  /**
+   * `RedirectOptions` for the target domain.
+   */
+  readonly redirectConfig: elbv2.RedirectOptions;
+
+  /**
+   * VPC that this `Redirector` instance will use.
+   *
+   * Some internal `Redirector` components require a VPC,
+   * so this is required to avoid VPC proliferation.
+   *
+   * If you don't already have a VPC,
+   * you can use `Redirector.createVpc`
+   * to create one with a recommended minimal configuration.
+   */
+  readonly vpc: ec2.Vpc;
 }
 
 /**
  * Create resources for an ALB to redirect from one domain to another.
  */
 export class Redirector extends cdk.Construct {
-  protected hostedZone: route53.IHostedZone;
-
-  constructor(scope: cdk.Construct, id: string, props: RedirectProps) {
-    super(scope, id);
-
-    this.hostedZone = props.hostedZone;
-
-    this.createAlb({
-      vpc: props.vpc,
-      redirectConfig: props.redirectConfig,
-    });
-  }
-
   /**
    * Create an Amazon VPC using the recommended Redirector configuration.
    *
@@ -45,6 +44,19 @@ export class Redirector extends cdk.Construct {
    */
   public static createVpc(scope: cdk.Construct): ec2.Vpc {
     return new ec2.Vpc(scope, "RedirectorVpc", { natGateways: 0 });
+  }
+
+  protected hostedZone: route53.IHostedZone;
+
+  constructor(scope: cdk.Construct, id: string, props: RedirectProps) {
+    super(scope, id);
+
+    this.hostedZone = props.hostedZone;
+
+    this.createAlb({
+      vpc: props.vpc,
+      redirectConfig: props.redirectConfig,
+    });
   }
 
   /**

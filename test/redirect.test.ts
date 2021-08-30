@@ -6,7 +6,7 @@ import {
 import * as ec2 from "@aws-cdk/aws-ec2";
 import * as route53 from "@aws-cdk/aws-route53";
 import * as cdk from "@aws-cdk/core";
-import { Redirector } from "../src/index";
+import { Redirector } from "../src";
 
 describe("createVpc", () => {
   it("creates exactly one VPC", () => {
