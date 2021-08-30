@@ -1,5 +1,6 @@
 const { AwsCdkConstructLibrary } = require('projen');
 const project = new AwsCdkConstructLibrary({
+  description: 'Easily redirect one domain to another.',
   author: 'mattsb42-aws',
   authorAddress: 'bullocm@amazon.com',
   defaultReleaseBranch: 'main',
