@@ -1,9 +1,9 @@
-import * as cdk from '@aws-cdk/core';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import * as elbv2 from '@aws-cdk/aws-elasticloadbalancingv2';
-import * as acm from '@aws-cdk/aws-certificatemanager';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as route53Targets from '@aws-cdk/aws-route53-targets';
+import * as acm from "@aws-cdk/aws-certificatemanager";
+import * as ec2 from "@aws-cdk/aws-ec2";
+import * as elbv2 from "@aws-cdk/aws-elasticloadbalancingv2";
+import * as route53 from "@aws-cdk/aws-route53";
+import * as route53Targets from "@aws-cdk/aws-route53-targets";
+import * as cdk from "@aws-cdk/core";
 
 /**
  * hostedZone: Existing Route53 Hosted Zone that controls source domain.
@@ -44,7 +44,7 @@ export class Redirector extends cdk.Construct {
    * @returns Amazon VPC
    */
   public static createVpc(scope: cdk.Construct): ec2.Vpc {
-    return new ec2.Vpc(scope, 'RedirectorVpc', { natGateways: 0 });
+    return new ec2.Vpc(scope, "RedirectorVpc", { natGateways: 0 });
   }
 
   /**
@@ -61,7 +61,7 @@ export class Redirector extends cdk.Construct {
     vpc: ec2.Vpc;
     redirectConfig: elbv2.RedirectOptions;
   }) {
-    const lb = new elbv2.ApplicationLoadBalancer(this, 'Redirector', {
+    const lb = new elbv2.ApplicationLoadBalancer(this, "Redirector", {
       vpc,
       internetFacing: true,
       ipAddressType: elbv2.IpAddressType.IPV4,
@@ -77,19 +77,19 @@ export class Redirector extends cdk.Construct {
     });
 
     // Make the certificate for this endpoint.
-    const certificate = new acm.Certificate(this, 'DomainCertificate', {
+    const certificate = new acm.Certificate(this, "DomainCertificate", {
       domainName: this.hostedZone.zoneName,
       validation: acm.CertificateValidation.fromDns(),
     });
 
     // Redirect to target.
-    const redirectListener = lb.addListener('RedirectListener', {
+    const redirectListener = lb.addListener("RedirectListener", {
       open: true,
       port: 443,
       protocol: elbv2.ApplicationProtocol.HTTPS,
       certificates: [certificate],
     });
-    redirectListener.addAction('RedirectAction', {
+    redirectListener.addAction("RedirectAction", {
       action: elbv2.ListenerAction.redirect({
         permanent: true,
         ...redirectConfig,
@@ -99,7 +99,7 @@ export class Redirector extends cdk.Construct {
     // Hook up DNS for the ALB.
     const lbAlias = new route53Targets.LoadBalancerTarget(lb);
     const target = route53.RecordTarget.fromAlias(lbAlias);
-    new route53.ARecord(this, 'RedirectorDns', {
+    new route53.ARecord(this, "RedirectorDns", {
       target,
       zone: this.hostedZone,
     });
