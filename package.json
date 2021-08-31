@@ -1,5 +1,5 @@
 {
-  "name": "aws-domain-redirector",
+  "name": "@aws/aws-domain-redirector",
   "description": "Easily redirect one domain to another.",
   "repository": {
     "type": "git",

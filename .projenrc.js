@@ -1,10 +1,14 @@
 const { AwsCdkConstructLibrary, ProjectType } = require("projen");
 const project = new AwsCdkConstructLibrary({
+  name: "aws-domain-redirector",
   description: "Easily redirect one domain to another.",
+  repository: "https://github.com/awslabs/aws-domain-redirector",
   author: "mattsb42-aws",
   authorAddress: "bullocm@amazon.com",
-  name: "aws-domain-redirector",
-  repository: "https://github.com/awslabs/aws-domain-redirector",
+  copyrightOwner: "Amazon.com Inc. or its affiliates",
+  license: "Apache-2.0",
+  // CDK and dependencies
+  projectType: ProjectType.LIB,
   cdkVersion: "1.95.2",
   cdkAssert: true,
   cdkDependencies: [
@@ -15,16 +19,18 @@ const project = new AwsCdkConstructLibrary({
     "@aws-cdk/aws-route53",
     "@aws-cdk/aws-route53-targets",
   ],
+  // Other Configuration
   gitignore: [".idea"],
   eslint: true,
   eslintOptions: {
     prettier: true,
   },
-  projectType: ProjectType.LIB,
   docgen: true,
+  docsDirectory: "docs",
   // Release Configuration
   defaultReleaseBranch: "main",
   // TODO: Turn these on as we're ready.
+  packageName: "@aws/aws-domain-redirector",
   releaseToNpm: false,
   publishToGo: false,
   publishToMaven: false,
