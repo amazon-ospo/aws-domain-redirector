@@ -1,9 +1,8 @@
-const { AwsCdkConstructLibrary } = require("projen");
+const { AwsCdkConstructLibrary, ProjectType } = require("projen");
 const project = new AwsCdkConstructLibrary({
   description: "Easily redirect one domain to another.",
   author: "mattsb42-aws",
   authorAddress: "bullocm@amazon.com",
-  defaultReleaseBranch: "main",
   name: "aws-domain-redirector",
   repository: "https://github.com/awslabs/aws-domain-redirector",
   cdkVersion: "1.95.2",
@@ -17,14 +16,19 @@ const project = new AwsCdkConstructLibrary({
     "@aws-cdk/aws-route53-targets",
   ],
   gitignore: [".idea"],
+  eslint: true,
   eslintOptions: {
     prettier: true,
   },
-  // deps: [],                          /* Runtime dependencies of this module. */
-  // description: undefined,            /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],                       /* Build dependencies for this module. */
-  // packageName: undefined,            /* The "name" in package.json. */
-  // projectType: ProjectType.UNKNOWN,  /* Which type of project this is (library/app). */
-  // release: undefined,                /* Add release management to this project. */
+  projectType: ProjectType.LIB,
+  docgen: true,
+  // Release Configuration
+  defaultReleaseBranch: "main",
+  // TODO: Turn these on as we're ready.
+  releaseToNpm: false,
+  publishToGo: false,
+  publishToMaven: false,
+  publishToNuget: false,
+  publishToPypi: false,
 });
 project.synth();
