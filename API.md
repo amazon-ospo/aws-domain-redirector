@@ -85,7 +85,7 @@ Existing Route53 Hosted Zone that controls the source domain.
 
 VPC that this `Redirector` instance will use.
 
-Some internal `Redirector` components require a VPC,
+Some internal `Redirector` components require an VPC,
 so this is required to avoid VPC proliferation.
 
 If you don't already have a VPC,

@@ -24,6 +24,8 @@ const project = new AwsCdkConstructLibrary({
   eslint: true,
   eslintOptions: {
     prettier: true,
+    fileExtensions: [".ts", ".md"],
+    dirs: ["src", "test", "docs"],
   },
   docgen: true,
   docsDirectory: "docs",
@@ -37,4 +39,29 @@ const project = new AwsCdkConstructLibrary({
   publishToNuget: false,
   publishToPypi: false,
 });
+
+// Markdown linting configuration
+project.addDevDeps("eslint-plugin-md");
+project.eslint.config.extends.push("plugin:md/recommended");
+project.eslint.addOverride({
+  files: ["*.md"],
+  parser: "markdown-eslint-parser",
+  rules: {
+    "prettier/prettier": ["error", { parser: "markdown" }],
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/return-await": "off",
+  },
+});
+project.eslint.addRules({
+  "md/remark": [
+    "error",
+    {
+      plugins: [
+        "preset-lint-markdown-style-guide",
+        ["lint-list-item-indent", "space"],
+      ],
+    },
+  ],
+});
+
 project.synth();

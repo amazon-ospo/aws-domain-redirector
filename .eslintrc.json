@@ -18,7 +18,8 @@
   "extends": [
     "plugin:import/typescript",
     "prettier",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:md/recommended"
   ],
   "settings": {
     "import/parsers": {
@@ -124,6 +125,18 @@
           "method"
         ]
       }
+    ],
+    "md/remark": [
+      "error",
+      {
+        "plugins": [
+          "preset-lint-markdown-style-guide",
+          [
+            "lint-list-item-indent",
+            "space"
+          ]
+        ]
+      }
     ]
   },
   "overrides": [
@@ -134,6 +147,22 @@
       "rules": {
         "@typescript-eslint/no-require-imports": "off",
         "import/no-extraneous-dependencies": "off"
+      }
+    },
+    {
+      "files": [
+        "*.md"
+      ],
+      "parser": "markdown-eslint-parser",
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "parser": "markdown"
+          }
+        ],
+        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/return-await": "off"
       }
     }
   ]
