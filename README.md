@@ -27,7 +27,7 @@ To create a `Redirector`, you need to provide:
 ## Further Reading
 
 - To see how to use `Redirector` in practice,
-  see [Example Stack](./docs/example.md).
+  see [Example Stack](docs/how-to-use.md).
 - For details on how to call `Redirector`,
   see the [API Reference](./API.md).
 - For more information about how `Redirector` works,
