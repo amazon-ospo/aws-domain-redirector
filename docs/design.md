@@ -12,7 +12,8 @@ we get nuanced redirection with no running code to maintain.
 In addition to the Application Load Balancer,
 Redirect creates the appropriate DNS A Record in Amazon Route 53
 and a TLS certificate for the load balancer
-in AWS Certificate Manager.
+in AWS Certificate Manager,
+which manages all certificate rotation.
 
 The Application Load Balancer needs
 an Amazon Virtual Private Cloud (Amazon VPC),
@@ -21,12 +22,15 @@ so it could be any VPC.
 However, since the default account quota is five VPCs per region,
 we don't want to create unnecessary VPCs
 by creating one for every Redirector instance.
-To avoid VPC proliferation,
-rather than creating a VPC for every load balancer
-Redirector provides a helper function that creates a basic VPC
-and each Redirector instance requires a VPC as input.
+Each Redirector instance requires a VPC as input,
+so Redirector provides a helper function that creates a basic VPC.
 
 ## Rough Pricing Estimates
+
+NOTE:
+All pricing estimates are as of 2021-09-02
+and are intended to highlight the relative difference between options,
+not provide to set precise expectations.
 
 In addition to being the simplest and lowest maintenance option,
 depending on your user-case Redirector can also be the cheapest option.

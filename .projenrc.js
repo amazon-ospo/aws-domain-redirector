@@ -1,7 +1,7 @@
 const { AwsCdkConstructLibrary, ProjectType } = require("projen");
 const project = new AwsCdkConstructLibrary({
   name: "aws-domain-redirector",
-  description: "Easily redirect one domain to another.",
+  description: "AWS CDK construct to redirect one domain to another.",
   repository: "https://github.com/awslabs/aws-domain-redirector",
   author: "mattsb42-aws",
   authorAddress: "bullocm@amazon.com",
