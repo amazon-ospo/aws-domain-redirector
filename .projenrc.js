@@ -19,6 +19,8 @@ const project = new AwsCdkConstructLibrary({
     "@aws-cdk/aws-route53",
     "@aws-cdk/aws-route53-targets",
   ],
+  // Disable stale issues workflow
+  stale: false,
   // Other Configuration
   gitignore: [".idea"],
   eslint: true,
