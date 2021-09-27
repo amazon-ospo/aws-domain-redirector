@@ -9,7 +9,7 @@ const project = new AwsCdkConstructLibrary({
   license: "Apache-2.0",
   // CDK and dependencies
   projectType: ProjectType.LIB,
-  cdkVersion: "1.95.2",
+  cdkVersion: "1.124.0",
   cdkAssert: true,
   cdkDependencies: [
     "@aws-cdk/core",
