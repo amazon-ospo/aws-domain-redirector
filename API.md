@@ -6,7 +6,7 @@
 
 Create resources for an ALB to redirect from one domain to another.
 
-#### Initializer <a name="@aws/aws-domain-redirector.Redirector.Initializer"></a>
+#### Initializers <a name="@aws/aws-domain-redirector.Redirector.Initializer"></a>
 
 ```typescript
 import { Redirector } from '@aws/aws-domain-redirector'
@@ -65,6 +65,10 @@ const redirectProps: RedirectProps = { ... }
 
 ##### `hostedZone`<sup>Required</sup> <a name="@aws/aws-domain-redirector.RedirectProps.property.hostedZone"></a>
 
+```typescript
+public readonly hostedZone: IHostedZone;
+```
+
 - *Type:* [`@aws-cdk/aws-route53.IHostedZone`](#@aws-cdk/aws-route53.IHostedZone)
 
 Existing Route53 Hosted Zone that controls the source domain.
@@ -73,6 +77,10 @@ Existing Route53 Hosted Zone that controls the source domain.
 
 ##### `redirectConfig`<sup>Required</sup> <a name="@aws/aws-domain-redirector.RedirectProps.property.redirectConfig"></a>
 
+```typescript
+public readonly redirectConfig: RedirectOptions;
+```
+
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.RedirectOptions`](#@aws-cdk/aws-elasticloadbalancingv2.RedirectOptions)
 
 `RedirectOptions` for the target domain.
@@ -80,6 +88,10 @@ Existing Route53 Hosted Zone that controls the source domain.
 ---
 
 ##### `vpc`<sup>Required</sup> <a name="@aws/aws-domain-redirector.RedirectProps.property.vpc"></a>
+
+```typescript
+public readonly vpc: Vpc;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.Vpc`](#@aws-cdk/aws-ec2.Vpc)
 
