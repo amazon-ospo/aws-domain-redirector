@@ -42,9 +42,9 @@ const project = new AwsCdkConstructLibrary({
   ],
   // Release Configuration
   defaultReleaseBranch: "main",
-  // TODO: Turn these on as we're ready.
   packageName: "@aws/aws-domain-redirector",
-  releaseToNpm: false,
+  releaseToNpm: true,
+  // TODO: Turn these on as we're ready.
   publishToGo: false,
   publishToMaven: false,
   publishToNuget: false,
