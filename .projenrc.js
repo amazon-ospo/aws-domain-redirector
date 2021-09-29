@@ -1,4 +1,4 @@
-const { AwsCdkConstructLibrary, ProjectType } = require("projen");
+const { AwsCdkConstructLibrary, ProjectType, NpmAccess } = require("projen");
 const project = new AwsCdkConstructLibrary({
   name: "aws-domain-redirector",
   description: "AWS CDK construct to redirect one domain to another.",
@@ -44,6 +44,7 @@ const project = new AwsCdkConstructLibrary({
   defaultReleaseBranch: "main",
   packageName: "@aws/aws-domain-redirector",
   releaseToNpm: true,
+  npmAccess: NpmAccess.PUBLIC,
   // TODO: Turn these on as we're ready.
   publishToGo: false,
   publishToMaven: false,
